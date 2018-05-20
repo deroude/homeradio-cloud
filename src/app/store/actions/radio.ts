@@ -1,16 +1,10 @@
 import { Action } from '@ngrx/store';
-import { Project } from '../../domain/project';
+import { Radio } from '../../domain/radio';
 
-export const SELECT = "[Project] Select";
-export const LOAD = "[Project] Load";
-export const LOAD_SUCCESS = "[Project] Load successful";
-export const LOAD_FAIL = "[Project] Load failed";
-export const CLEAR = "[Project] Clear";
-
-export class SelectAction implements Action {
-    readonly type = SELECT;
-    constructor(public payload: string) { }
-}
+export const LOAD = "[Radio] Load";
+export const LOAD_SUCCESS = "[Radio] Load successful";
+export const LOAD_FAIL = "[Radio] Load failed"
+export const CLEAR = "[Radio] Clear"
 
 export class LoadAction implements Action {
     readonly type = LOAD;
@@ -24,7 +18,7 @@ export class ClearAction implements Action {
 
 export class LoadSuccessAction implements Action {
     readonly type = LOAD_SUCCESS;
-    constructor(public payload: Project[]) { }
+    constructor(public payload: Radio) { }
 }
 
 export class LoadFailAction implements Action {
@@ -32,8 +26,7 @@ export class LoadFailAction implements Action {
     constructor(public payload: string) { }
 }
 
-export type Actions = SelectAction
-    | LoadSuccessAction
+export type Actions = LoadSuccessAction
     | LoadFailAction
     | ClearAction
     | LoadAction;

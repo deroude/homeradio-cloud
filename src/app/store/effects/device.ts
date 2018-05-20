@@ -14,13 +14,13 @@ import { of } from 'rxjs/observable/of';
 
 import * as firebase from 'firebase/app';
 
-import * as tenant from "../actions/tenant";
-import * as project from "../actions/project";
+import * as device from "../actions/device";
 import * as auth from "../actions/auth";
+import * as radio from "../actions/radio";
 
 import { State } from '../reducers';
-import { Tenant } from '../../domain/Tenant';
 import { FirestoreService } from '../../services/firestore.service';
+import { Device } from '../../domain/device';
 
 @Injectable()
 export class TenantEffects {
@@ -30,29 +30,28 @@ export class TenantEffects {
     constructor(private actions$: Actions, private store$: Store<State>, private db: FirestoreService) { }
 
     @Effect()
-    loadTenants$: Observable<Action> = this.actions$
-        .ofType(tenant.LOAD)
+    loadDevices$: Observable<Action> = this.actions$
+        .ofType(device.LOAD)
         .withLatestFrom(this.auth$)
         .filter(([a, u]) => u !== null)
-        .switchMap(([a, u]) => this.db.getCollection<Tenant>("/tenant")
+        .switchMap(([a, u]) => this.db.getCollection<Device>("/devices")
             .takeUntil(this.auth$.filter(u => u === null))
-            .map(coll => coll.filter((t: Tenant) => t.members.includes(u.uid)))
         )
-        .map(tlist => new tenant.LoadSuccessAction(tlist))
-        .catch(err => of(new tenant.LoadFailAction(err)));
+        .map(tlist => new device.LoadSuccessAction(tlist))
+        .catch(err => of(new device.LoadFailAction(err)));
 
     @Effect()
-    unloadTenants$: Observable<Action> = this.actions$
+    unloadDevices$: Observable<Action> = this.actions$
         .ofType(auth.SIGNOUT)
-        .map(() => new tenant.ClearAction());
+        .map(() => new device.ClearAction());
 
     @Effect()
-    selectTenants$: Observable<Action> = this.actions$
-        .ofType(tenant.SELECT)
-        .map(() => new project.LoadAction());
+    selectDevice$: Observable<Action> = this.actions$
+        .ofType(device.SELECT)
+        .map(() => new radio.LoadAction());
 
     @Effect()
     afterLogin$: Observable<Action> = this.actions$
         .ofType(auth.SIGNIN_SUCCESS)
-        .map(() => new tenant.LoadAction());
+        .map(() => new device.LoadAction());
 }

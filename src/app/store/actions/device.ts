@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
-import { Tenant } from '../../domain/Tenant';
+import { Device } from '../../domain/device';
 
-export const SELECT = "[Tenant] Select";
-export const LOAD = "[Tenant] Load";
-export const LOAD_SUCCESS = "[Tenant] Load successful";
-export const LOAD_FAIL = "[Tenant] Load failed"
-export const CLEAR = "[Tenant] Clear"
+export const SELECT = "[Device] Select";
+export const LOAD = "[Device] Load";
+export const LOAD_SUCCESS = "[Device] Load successful";
+export const LOAD_FAIL = "[Device] Load failed"
+export const CLEAR = "[Device] Clear"
 
 export class SelectAction implements Action {
     readonly type = SELECT;
@@ -24,7 +24,7 @@ export class ClearAction implements Action {
 
 export class LoadSuccessAction implements Action {
     readonly type = LOAD_SUCCESS;
-    constructor(public payload: Tenant[]) { }
+    constructor(public payload: Device[]) { }
 }
 
 export class LoadFailAction implements Action {

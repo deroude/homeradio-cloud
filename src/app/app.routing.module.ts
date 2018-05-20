@@ -1,21 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProjectListComponent } from './components/project-list/project-list.component';
-import { TenantComponent } from './components/tenant/tenant.component';
-import { ProjectComponent } from './components/project/project.component';
 import { HomeComponent } from './components/home/home.component';
+import { DeviceComponent } from './components/device/device.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  {
-    path: 'tenant/:tenantId', component: TenantComponent,
-    children: [
-      { path: '', redirectTo: 'project', pathMatch: 'full' },
-      { path: 'project/:projectId', component: ProjectComponent }
-    ]
-  }
+  { path: 'devices/:deviceId', component: DeviceComponent }
 ];
 
 @NgModule({
