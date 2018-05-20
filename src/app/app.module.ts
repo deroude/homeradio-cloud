@@ -18,40 +18,30 @@ import { AppMaterialModule } from './app.material.module';
 import { environment } from '../environments/environment';
 
 import { MainComponent } from './components/main/main.component';
-import { RequirementComponent } from './components/requirement/requirement.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
-import { ProjectListComponent } from './components/project-list/project-list.component';
-import { TenantComponent } from './components/tenant/tenant.component';
-import { ProjectComponent } from './components/project/project.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { MarkedPipe } from './pipes/marked.pipe';
 
 import { reducers } from './store/reducers';
 import { AuthEffects } from './store/effects/auth';
 import { ProgressEffects } from './store/effects/progress';
-import { TenantEffects } from './store/effects/tenant';
-import { ProjectEffects } from './store/effects/project';
-import { RequirementEffects } from './store/effects/requirement';
 import { FirestoreService } from './services/firestore.service';
-import { RequirementListComponent } from './components/requirement-list/requirement-list.component';
+import { DeviceComponent } from './components/device/device.component';
+import { DeviceEffects } from './store/effects/device';
+import { GenreEffects } from './store/effects/genre';
+import { StationEffects } from './store/effects/station';
 
 
 @NgModule({
   declarations: [
     MainComponent,
-    RequirementComponent,
     AuthComponent,
     SignupComponent,
     LoginComponent,
-    ProjectListComponent,
-    TenantComponent,
-    ProjectComponent,
-    MarkedPipe,
     HomeComponent,
-    RequirementListComponent
+    DeviceComponent
   ],
   imports: [
     BrowserModule,
@@ -70,9 +60,9 @@ import { RequirementListComponent } from './components/requirement-list/requirem
       maxAge: 15, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
-    EffectsModule.forRoot([AuthEffects, ProgressEffects, TenantEffects, ProjectEffects, RequirementEffects])
+    EffectsModule.forRoot([AuthEffects, ProgressEffects, DeviceEffects, GenreEffects, StationEffects])
   ],
-  providers: [AngularFireAuth,FirestoreService],
+  providers: [AngularFireAuth, FirestoreService],
   bootstrap: [MainComponent],
   entryComponents: [LoginComponent, SignupComponent]
 })

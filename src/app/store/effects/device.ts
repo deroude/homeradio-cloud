@@ -23,7 +23,7 @@ import { FirestoreService } from '../../services/firestore.service';
 import { Device } from '../../domain/device';
 
 @Injectable()
-export class TenantEffects {
+export class DeviceEffects {
 
     private auth$: Observable<firebase.User> = this.store$.select(state => state.auth.user);
 
