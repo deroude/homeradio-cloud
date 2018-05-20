@@ -1,0 +1,4 @@
+<mat-card-content class="indent r-list">
+    <button mat-raised-button (click)="addRequirement()">Add requirement</button>
+    <requirement *ngFor="let r of requirements" [source]="r"></requirement>
+</mat-card-content>
