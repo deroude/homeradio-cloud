@@ -36,6 +36,7 @@ export class DeviceEffects {
         .filter(([a, u]) => u !== null)
         .switchMap(([a, u]) => this.db.getCollection<Device>("/devices")
             .takeUntil(this.auth$.filter(u => u === null))
+            .map(coll => coll.filter((t: Device) => t.owner === u.uid))
         )
         .map(tlist => new device.LoadSuccessAction(tlist))
         .catch(err => of(new device.LoadFailAction(err)));

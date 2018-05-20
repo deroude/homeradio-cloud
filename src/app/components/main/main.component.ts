@@ -16,11 +16,11 @@ export class MainComponent {
   @HostBinding("class") classes = "mat-app-background basic-container";
 
   progress$: Observable<fromProgress.State>;
-  tenants$: Observable<Device[]>;
+  devices$: Observable<Device[]>;
 
   constructor(private router: Router, private store: Store<fromRoot.State>) {
     this.progress$ = store.select(state => state.progress)
-    this.tenants$ = store.select(state => state.device.devices)
+    this.devices$ = store.select(state => state.device.devices)
     this.store.select(state => state.auth.user).subscribe(u => {
       if (u === null) this.router.navigate(["home"]);
     });
