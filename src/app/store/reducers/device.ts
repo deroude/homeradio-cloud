@@ -4,7 +4,7 @@ import { Device } from "../../domain/device";
 export interface State {
     devices: Device[];
     error: string;
-    selected: string;
+    selected: Device;
 }
 
 export const initialState: State = {

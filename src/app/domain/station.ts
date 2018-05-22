@@ -1,6 +1,6 @@
 export class Station{
     name:string;
-    id:number;
+    id:string;
     bitRate?:number;
     currentTrack?:string;
     status?:boolean;

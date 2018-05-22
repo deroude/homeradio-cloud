@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule, Effect } from '@ngrx/effects';
@@ -22,13 +23,15 @@ import { AuthComponent } from './components/auth/auth.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { GenreListComponent } from './components/genre-list/genre-list.component';
+import { DeviceComponent } from './components/device/device.component';
 
+import { DeviceService } from './services/device.service';
 
 import { reducers } from './store/reducers';
 import { AuthEffects } from './store/effects/auth';
 import { ProgressEffects } from './store/effects/progress';
 import { FirestoreService } from './services/firestore.service';
-import { DeviceComponent } from './components/device/device.component';
 import { DeviceEffects } from './store/effects/device';
 import { GenreEffects } from './store/effects/genre';
 import { StationEffects } from './store/effects/station';
@@ -41,13 +44,15 @@ import { StationEffects } from './store/effects/station';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    DeviceComponent
+    DeviceComponent,
+    GenreListComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppMaterialModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -62,7 +67,7 @@ import { StationEffects } from './store/effects/station';
     }),
     EffectsModule.forRoot([AuthEffects, ProgressEffects, DeviceEffects, GenreEffects, StationEffects])
   ],
-  providers: [AngularFireAuth, FirestoreService],
+  providers: [AngularFireAuth, FirestoreService,DeviceService],
   bootstrap: [MainComponent],
   entryComponents: [LoginComponent, SignupComponent]
 })

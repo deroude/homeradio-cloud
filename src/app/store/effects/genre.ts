@@ -16,20 +16,33 @@ import * as firebase from 'firebase/app';
 
 import * as genre from "../actions/genre";
 import * as radio from "../actions/radio";
+import * as device from "../actions/device";
 
 import { State } from '../reducers';
 import { FirestoreService } from '../../services/firestore.service';
 import { Device } from '../../domain/device';
+import { DeviceService } from '../../services/device.service';
 
 @Injectable()
 export class GenreEffects {
 
     private auth$: Observable<firebase.User> = this.store$.select(state => state.auth.user);
 
-    constructor(private actions$: Actions, private store$: Store<State>, private db: FirestoreService) { }
+    constructor(private actions$: Actions, private store$: Store<State>, private db: FirestoreService, private local: DeviceService) { }
 
     @Effect()
-    selectGenre$: Observable<Action> = this.actions$
-        .ofType(genre.SELECT)
+    selectPrimaryGenre$: Observable<Action> = this.actions$
+        .ofType(genre.SELECT_PRIMARY)
         .map(() => new radio.LoadAction());
+
+    @Effect()
+    loadPrimaryGenres$: Observable<Action> = this.actions$
+        .ofType(device.SELECT)
+        .map((action: device.SelectAction) => action.payload)
+        .withLatestFrom(this.store$.select(state => state.device))
+        .filter(([d, s]) => s.selected !== null)
+        .mergeMap(([d, s]) =>
+            this.local.getPrimaryGenres(s.selected.localAddress)
+                .map(gs => new genre.PrimaryLoadSuccessAction(gs))
+        );
 }

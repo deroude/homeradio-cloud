@@ -1,5 +1,5 @@
 export class Genre{
-    id:number;
+    id:string;
     hasChildren?:boolean;
     name:string;
 }

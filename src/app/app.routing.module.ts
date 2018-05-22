@@ -7,7 +7,7 @@ import { DeviceComponent } from './components/device/device.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'devices/:deviceId', component: DeviceComponent }
+  { path: 'device/:deviceId', component: DeviceComponent }
 ];
 
 @NgModule({

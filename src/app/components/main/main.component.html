@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" role="header" class="app-toolbar">
     <button mat-button routerLink="/home">Home</button>
-    <button mat-button *ngFor="let t of devices$|async" [routerLink]="['/device',t.id]">{{t.id}}</button>
+    <button mat-button *ngFor="let t of devices$|async" [routerLink]="['/device',t.id]">{{t.name}}</button>
     <span class="filler"></span>
     <auth></auth>
 </mat-toolbar>

@@ -3,4 +3,5 @@ export class Device {
     localAddress: string;
     owner: string;
     refresh: boolean;
+    name?: string;
 }
