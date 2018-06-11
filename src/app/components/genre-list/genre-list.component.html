@@ -1,3 +1,3 @@
-<ul>
-  <li *ngFor="let g of genres$|async">{{g.name}}</li>
-</ul>
+<div class="button-row">
+  <button mat-raised-button color="primary" *ngFor="let g of genres$|async">{{g.name}}</button>
+</div>
