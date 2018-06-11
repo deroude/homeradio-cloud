@@ -20,7 +20,7 @@ export function reducer(state = initialState, action: device.Actions): State {
         case device.LOAD_FAIL:
             return Object.assign({}, state, { devices: null, error: action.payload });
         case device.SELECT:
-            return Object.assign({}, state, { selected: action.payload });
+            return Object.assign({}, state, { selected: state.devices.find(d => d.id === action.payload) });
         case device.CLEAR:
             return initialState;
     }

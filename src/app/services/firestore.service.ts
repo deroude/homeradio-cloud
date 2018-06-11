@@ -27,7 +27,7 @@ export class FirestoreService {
     if (!checkAuth || this.afAuth.auth.currentUser)
       return this.db.collection(path).snapshotChanges()
         .map(actions => {
-          console.log(actions);
+          // console.log(actions);
           return actions.map(ax => {
             let tx: T = ax.payload.doc.data() as T;
             tx.id = ax.payload.doc.id;

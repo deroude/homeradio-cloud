@@ -37,10 +37,9 @@ export class GenreEffects {
 
     @Effect()
     loadPrimaryGenres$: Observable<Action> = this.actions$
-        .ofType(device.SELECT)
-        .map((action: device.SelectAction) => action.payload)
+        .ofType(genre.LOAD_PRIMARY)
         .withLatestFrom(this.store$.select(state => state.device))
-        .filter(([d, s]) => s.selected !== null)
+        .filter(([d,s]) => s.selected !== null)
         .mergeMap(([d, s]) =>
             this.local.getPrimaryGenres(s.selected.localAddress)
                 .map(gs => new genre.PrimaryLoadSuccessAction(gs))

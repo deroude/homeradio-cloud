@@ -17,12 +17,8 @@ export class DeviceComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router, private store: Store<fromRoot.State>) {
-    this.route.paramMap.mergeMap((params: ParamMap) => this.store.select(state => state.device)
-      .filter(ds => ds.devices.length > 0)
-      .map(ds => ds.devices.find(d => d.id === params.get('deviceId'))))
-      .subscribe(d => store.dispatch(new SelectAction(d)));
-  }
 
+  }
 
   ngOnInit() {
   }

@@ -9,7 +9,7 @@ export const CLEAR = "[Device] Clear"
 
 export class SelectAction implements Action {
     readonly type = SELECT;
-    constructor(public payload: Device) { }
+    constructor(public payload: string) { }
 }
 
 export class LoadAction implements Action {

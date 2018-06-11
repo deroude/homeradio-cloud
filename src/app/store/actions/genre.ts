@@ -1,12 +1,18 @@
 import { Action } from '@ngrx/store';
 import { Genre } from '../../domain/genre';
 
+export const LOAD_PRIMARY = "[Genre] Load Primary Genres";
 export const SELECT_PRIMARY = "[Genre] Select Primary Genre";
 export const SELECT_SECONDARY = "[Genre] Select Secondary Genre";
 export const PRIMARY_LOAD_SUCCESS = "[Genre] Primary Load Success";
 export const PRIMARY_LOAD_FAIL = "[Genre] Primary Load Fail";
 export const SECONDARY_LOAD_SUCCESS = "[Genre] Secondary Load Success";
 export const SECONDARY_LOAD_FAIL = "[Genre] Secondary Load Fail";
+
+export class LoadPrimaryAction implements Action {
+    readonly type = LOAD_PRIMARY;
+    constructor() { }
+}
 
 export class SelectPrimaryAction implements Action {
     readonly type = SELECT_PRIMARY;
@@ -36,7 +42,8 @@ export class SecondaryLoadFailAction implements Action {
     constructor(public payload: string) { }
 }
 
-export type Actions = SelectPrimaryAction
+export type Actions = LoadPrimaryAction
+    | SelectPrimaryAction
     | SelectSecondaryAction
     | PrimaryLoadSuccessAction
     | PrimaryLoadFailAction

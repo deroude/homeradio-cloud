@@ -17,6 +17,7 @@ import * as firebase from 'firebase/app';
 import * as device from "../actions/device";
 import * as auth from "../actions/auth";
 import * as radio from "../actions/radio";
+import * as genre from "../actions/genre";
 
 import { State } from '../reducers';
 import { FirestoreService } from '../../services/firestore.service';
@@ -47,9 +48,14 @@ export class DeviceEffects {
         .map(() => new device.ClearAction());
 
     @Effect()
-    selectDevice$: Observable<Action> = this.actions$
+    loadRadio$: Observable<Action> = this.actions$
         .ofType(device.SELECT)
         .map(() => new radio.LoadAction());
+
+    @Effect()
+    loadGenres$: Observable<Action> = this.actions$
+        .ofType(device.SELECT)
+        .map(() => new genre.LoadPrimaryAction());
 
     @Effect()
     afterLogin$: Observable<Action> = this.actions$

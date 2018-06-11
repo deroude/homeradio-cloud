@@ -7,6 +7,7 @@ import * as authActions from "../actions/auth";
 import * as progressActions from "../actions/progress";
 import * as deviceActions from "../actions/device";
 import * as radioActions from "../actions/radio";
+import * as genreActions from "../actions/genre";
 
 
 type showProgressTypes = authActions.SigninAction
@@ -30,7 +31,9 @@ const showProgressActions = [
     authActions.SIGNOUT,
     authActions.SIGNUP,
     deviceActions.LOAD,
-    radioActions.LOAD
+    genreActions.LOAD_PRIMARY,
+    genreActions.SELECT_PRIMARY,
+    genreActions.SELECT_SECONDARY
 ]
 
 const hideProgressActions = [
@@ -43,7 +46,11 @@ const hideProgressActions = [
     deviceActions.LOAD_FAIL,
     deviceActions.LOAD_SUCCESS,
     radioActions.LOAD_FAIL,
-    radioActions.LOAD_SUCCESS
+    radioActions.LOAD_SUCCESS,
+    genreActions.PRIMARY_LOAD_FAIL,
+    genreActions.PRIMARY_LOAD_SUCCESS,
+    genreActions.SECONDARY_LOAD_FAIL,
+    genreActions.SECONDARY_LOAD_SUCCESS
 ]
 
 @Injectable()

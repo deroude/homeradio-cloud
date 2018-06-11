@@ -1,10 +1,10 @@
 <mat-toolbar color="primary" role="header" class="app-toolbar">
     <button mat-button routerLink="/home">Home</button>
-    <button mat-button *ngFor="let t of devices$|async" [routerLink]="['/device',t.id]">{{t.name}}</button>
+    <button mat-button *ngFor="let t of devices$|async" [routerLink]="['/device',t.id]" (click)="selectDevice(t.id)">{{t.name}}</button>
     <span class="filler"></span>
     <auth></auth>
 </mat-toolbar>
-<mat-progress-bar mode="indeterminate" *ngIf="(progress$|async).show" class="app-progress"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="progress$|async" class="app-progress"></mat-progress-bar>
 <div class="app-container">
     <router-outlet></router-outlet>
 </div>
