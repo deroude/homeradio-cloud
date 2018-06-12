@@ -1,0 +1,11 @@
+.local-toolbar {
+    width: 100%;
+    height: auto;
+    padding:.5rem;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    button {
+        margin: .5rem;
+    }
+}

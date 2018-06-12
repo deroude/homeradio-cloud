@@ -28,9 +28,9 @@ export function reducer(state = initialState, action: genre.Actions): State {
         case genre.PRIMARY_LOAD_FAIL:
             return Object.assign({}, state, { primaryGenres: [], error: action.payload });
         case genre.SECONDARY_LOAD_SUCCESS:
-            return Object.assign({}, state, { primaryGenres: action.payload, error: null });
+            return Object.assign({}, state, { secondaryGenres: action.payload, error: null });
         case genre.SECONDARY_LOAD_FAIL:
-            return Object.assign({}, state, { primaryGenres: [], error: action.payload });
+            return Object.assign({}, state, { secondaryGenres: [], error: action.payload });
     }
     return state;
 }

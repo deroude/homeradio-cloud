@@ -6,7 +6,8 @@ import 'rxjs/add/operator/mergeMap';
 
 import * as fromRoot from '../../store/reducers';
 import { Store } from '@ngrx/store';
-import { SelectAction } from '../../store/actions/device';
+import { Genre } from '../../domain/genre';
+import { Station } from '../../domain/station';
 
 @Component({
   selector: 'device',
@@ -15,12 +16,21 @@ import { SelectAction } from '../../store/actions/device';
 })
 export class DeviceComponent implements OnInit {
 
+  selectedPrimaryGenre$: Observable<Genre>;
+  selectedSecondaryGenre$: Observable<Genre>;
+  selectedStation$: Observable<Station>;
+  playing$:Observable<boolean>;
+
   constructor(private route: ActivatedRoute,
     private router: Router, private store: Store<fromRoot.State>) {
 
   }
 
   ngOnInit() {
+    this.selectedPrimaryGenre$ = this.store.select(state => state.genre.selectedPrimaryGenre);
+    this.selectedSecondaryGenre$ = this.store.select(state => state.genre.selectedSecondaryGenre);
+    this.selectedStation$ = this.store.select(state => state.station.selected);
+    this.playing$ = this.store.select(state => state.station.playing);
   }
 
 }

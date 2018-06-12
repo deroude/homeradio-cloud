@@ -8,13 +8,17 @@ import * as progressActions from "../actions/progress";
 import * as deviceActions from "../actions/device";
 import * as radioActions from "../actions/radio";
 import * as genreActions from "../actions/genre";
+import * as stationActions from "../actions/station";
 
 
 type showProgressTypes = authActions.SigninAction
     | authActions.SignupAction
     | authActions.SignoutAction
     | deviceActions.LoadAction
-    | radioActions.LoadAction;
+    | genreActions.LoadPrimaryAction
+    | genreActions.SelectPrimaryAction
+    | genreActions.SelectSecondaryAction
+    | stationActions.LoadAction;
 
 type hideProgressType = authActions.SigninSuccessAction
     | authActions.SignupSuccessAction
@@ -24,7 +28,9 @@ type hideProgressType = authActions.SigninSuccessAction
     | authActions.SignupFailAction
     | authActions.SignoutFailAction
     | deviceActions.LoadFailAction
-    | radioActions.LoadFailAction;
+    | radioActions.LoadFailAction
+    | stationActions.LoadSuccessfulAction
+    | stationActions.LoadFailedAction;
 
 const showProgressActions = [
     authActions.SIGNIN,
@@ -33,7 +39,8 @@ const showProgressActions = [
     deviceActions.LOAD,
     genreActions.LOAD_PRIMARY,
     genreActions.SELECT_PRIMARY,
-    genreActions.SELECT_SECONDARY
+    // genreActions.SELECT_SECONDARY,
+    stationActions.LOAD
 ]
 
 const hideProgressActions = [
@@ -50,7 +57,9 @@ const hideProgressActions = [
     genreActions.PRIMARY_LOAD_FAIL,
     genreActions.PRIMARY_LOAD_SUCCESS,
     genreActions.SECONDARY_LOAD_FAIL,
-    genreActions.SECONDARY_LOAD_SUCCESS
+    genreActions.SECONDARY_LOAD_SUCCESS,
+    stationActions.LOAD_SUCCESSFUL,
+    stationActions.LOAD_FAILED
 ]
 
 @Injectable()

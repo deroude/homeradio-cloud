@@ -1,3 +1,5 @@
 <div class="button-row">
-  <button mat-raised-button color="primary" *ngFor="let g of genres$|async">{{g.name}}</button>
+  <button mat-raised-button [color]="getColor(g.id)" *ngFor="let g of genres$|async" (click)="selectGenre(g)">
+    {{g.name|unescape}}
+  </button>
 </div>

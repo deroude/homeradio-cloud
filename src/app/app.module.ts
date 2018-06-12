@@ -35,6 +35,8 @@ import { FirestoreService } from './services/firestore.service';
 import { DeviceEffects } from './store/effects/device';
 import { GenreEffects } from './store/effects/genre';
 import { StationEffects } from './store/effects/station';
+import { UnescapePipe } from './filters/unescape';
+import { StationListComponent } from './components/station-list/station-list.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { StationEffects } from './store/effects/station';
     LoginComponent,
     HomeComponent,
     DeviceComponent,
-    GenreListComponent
+    GenreListComponent,
+    UnescapePipe,
+    StationListComponent
   ],
   imports: [
     BrowserModule,

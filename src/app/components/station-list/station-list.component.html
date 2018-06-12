@@ -1,0 +1,5 @@
+<div class="button-row">
+  <button mat-raised-button [color]="getColor(s.id)" *ngFor="let s of stations$|async" (click)="selectStation(s)">
+    {{s.name|unescape}}
+  </button>
+</div>

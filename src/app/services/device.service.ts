@@ -20,20 +20,20 @@ export class DeviceService {
       .catch((err: any) => { console.log(err); return Observable.of([]) });
   }
 
-  public getSecondaryGenres(api:string,id: number) {
+  public getSecondaryGenres(api:string,id: string) {
     return this._http.get(api+ "/shoutcast/genre/secondary/" + id)
       .map((re: any) => re.genrelist.genre.filter(g => g.count > 0).map(g => <Genre>{ id: g.id, name: g.name }))
       .catch((err: any) => { console.log(err); return Observable.of([]) });
   }
 
-  public getStations(api:string,genre: number): Observable<Station[]> {
+  public getStations(api:string,genre: string): Observable<Station[]> {
     return this._http.get(api+"/shoutcast/stations/" + genre)
       .map((re: any) =>
         re.stationlist.station.map(s => <Station>{ id: s.id, name: s.name, bitRate: s.br, currentTrack: s.ct }))
       .catch((err: any) => { console.log(err); return Observable.of([]) });
   }
 
-  public getStationStreams(api:string,stationId: number): Observable<string[]> {
+  public getStationStreams(api:string,stationId: string): Observable<string[]> {
     return this._http.get<string[]>(api+"/shoutcast/station/" + stationId)
       .catch((err: any) => { console.log(err); return Observable.of([]) });
   }

@@ -33,7 +33,6 @@ export class MainComponent implements OnInit {
   }
 
   selectDevice(id: string) {
-    console.log("click");
     this.store.dispatch(new SelectAction(id));
   }
 }

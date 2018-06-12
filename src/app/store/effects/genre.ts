@@ -15,6 +15,7 @@ import { of } from 'rxjs/observable/of';
 import * as firebase from 'firebase/app';
 
 import * as genre from "../actions/genre";
+import * as station from "../actions/station";
 import * as radio from "../actions/radio";
 import * as device from "../actions/device";
 
@@ -31,17 +32,35 @@ export class GenreEffects {
     constructor(private actions$: Actions, private store$: Store<State>, private db: FirestoreService, private local: DeviceService) { }
 
     @Effect()
-    selectPrimaryGenre$: Observable<Action> = this.actions$
-        .ofType(genre.SELECT_PRIMARY)
-        .map(() => new radio.LoadAction());
-
-    @Effect()
     loadPrimaryGenres$: Observable<Action> = this.actions$
         .ofType(genre.LOAD_PRIMARY)
         .withLatestFrom(this.store$.select(state => state.device))
-        .filter(([d,s]) => s.selected !== null)
+        .filter(([d, s]) => s.selected !== null)
         .mergeMap(([d, s]) =>
             this.local.getPrimaryGenres(s.selected.localAddress)
                 .map(gs => new genre.PrimaryLoadSuccessAction(gs))
         );
+
+    @Effect()
+    selectPrimaryGenre$: Observable<Action> = this.actions$
+        .ofType(genre.SELECT_PRIMARY)
+        .map((action: genre.SelectPrimaryAction) => action.payload)
+        .withLatestFrom(this.store$.select(state => state.device))
+        .filter(([pg, s]) => s.selected !== null)
+        .mergeMap(([pg, s]) =>
+            this.local.getSecondaryGenres(s.selected.localAddress, pg.id)
+                .map(gs => new genre.SecondaryLoadSuccessAction(gs))
+        );
+
+    @Effect()
+    selectSecondaryGenre$: Observable<Action> = this.actions$
+        .ofType(genre.SELECT_SECONDARY)
+        .map((action: genre.SelectSecondaryAction) => action.payload)
+        .withLatestFrom(this.store$.select(state => state.device))
+        .filter(([pg, s]) => s.selected !== null)
+        .mergeMap(([pg, s]) =>
+            this.local.getStations(s.selected.localAddress, pg.id)
+                .map(gs => new station.LoadSuccessfulAction(gs))
+        );
+
 }

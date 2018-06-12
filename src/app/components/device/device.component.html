@@ -1,1 +1,12 @@
-<genre-list></genre-list>
+<mat-toolbar color="primary" role="header" class="local-toolbar">
+    <button mat-button>Refresh</button>
+    <button mat-raised-button color="primary" *ngIf="selectedPrimaryGenre$|async">{{(selectedPrimaryGenre$|async).name}}</button>
+    <button mat-raised-button color="accent" *ngIf="selectedSecondaryGenre$|async">{{(selectedSecondaryGenre$|async).name}}</button>
+    <button mat-raised-button color="warn" *ngIf="selectedStation$|async">
+        <mat-icon aria-hidden="true" fontSet="fas" fontIcon="fa-play" *ngIf="playing$|async"></mat-icon>
+        <span>{{(selectedStation$|async).name}}</span>
+    </button>
+</mat-toolbar>
+<station-list></station-list>
+<genre-list [primary]="false"></genre-list>
+<genre-list [primary]="true"></genre-list>
